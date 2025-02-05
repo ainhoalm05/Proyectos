@@ -47,13 +47,13 @@
     margin-right: auto;
     height: 90%;
     top: 5%;
-    border-radius: 6px;
-  
+    border-radius: 6px;  
   }
   
   .letter:after {
     content: "";
     position: absolute;
+    pointer-events: none;
     top: 0;
     bottom: 0;
     left: 0;
@@ -72,7 +72,7 @@
     background: white;
     border-radius: 4px;
     padding: 10px;
-    font-size: 16px;
+    font-size: 10px;
     font-style: normal;
     text-align: center;
     outline: none;
@@ -102,6 +102,8 @@
   .words.line4 {
     top: 70%;
   }
+
+  
   
   .open .flap {
     transform: rotateX(180deg);
@@ -128,21 +130,39 @@
 }
 
   
-  .open .letter {
-    transform: translateY(-180px) scale(2.3);
-    transition: transform 0.8s ease-in-out;
-    z-index: 3;
-    position: relative;
-    top: 52%;
+.open .letter {
+  transform: translateY(-180px) scale(2.3);
+  transition: transform 0.8s ease-in-out;
+  z-index: 3;
+  position: relative;
+  top: 52%;
 }
   
-  .hearts {
-    position: absolute;
-    top: 90px;
-    left: 0;
-    right: 0;
-    z-index: 3;
+.hearts {
+  position: absolute;
+  bottom: -30px; /* Ahora emergen desde debajo de la carta */
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+@-webkit-keyframes slideUp {
+  0% {
+    top: 50px; /* Inician más abajo */
   }
+  100% {
+    top: -600px;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    top: 50px;
+  }
+  100% {
+    top: -600px;
+  }
+}
   
   .heart {
     position: absolute;
@@ -293,3 +313,50 @@
     background-color: #fc9d9d;
     color: #a10000;
   }
+
+  .hidden-message-box {
+    width: 70%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #ffcccc;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+    color: #a10000;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    user-select: none; /* Evita selección de texto */
+}
+
+.hidden-text {
+    display: block;
+    pointer-events: none; /* Evita interacción */
+}
+
+.revealed-text {
+    display: none;
+    color: #d00000;
+    font-weight: bold;
+    pointer-events: none; /* Evita edición */
+    user-select: none; /* Evita selección de texto */
+}
+
+/* Cuando se hace clic, cambia el estilo */
+.hidden-message-box.clicked {
+    background-color: #ffd9d9;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hidden-message-box.clicked .hidden-text {
+    display: none;
+}
+
+.hidden-message-box.clicked .revealed-text {
+    display: block;
+}
+
+.hidden-message-box.clicked .revealed-text {
+    display: block;
+}
